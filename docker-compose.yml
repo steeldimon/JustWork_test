@@ -1,0 +1,89 @@
+version: '2'
+services:
+#    pages_app:
+#        image: pages_app:latest
+#        build: .
+#        container_name: pages_app_dc
+#        restart: always
+#        ports:
+#            - 0.0.0.0:8000:8000
+#        env_file: .env
+#        links:
+#            - database:dbserver
+#        depends_on:
+#            - database
+#            - rabbit
+#            - worker
+#        volumes:
+#            - ./pages_app:/home/pages_app/pages_app:rw
+    runserver:
+        image: pages_app:latest
+        build: .
+        container_name: pages_app_dc
+        ports:
+            - 0.0.0.0:8000:8000
+        env_file: .env
+        links:
+            - database:dbserver
+        depends_on:
+            - database
+            - rabbit
+            - worker
+        volumes:
+            - ./pages_app:/home/pages_app/pages_app:rw
+            - ./runserver.sh:/home/pages_app/pages_app/runserver.sh
+        entrypoint: ./runserver.sh
+
+    autotests:
+        image: pages_app:latest
+        build: .
+        container_name: autotest_dc
+        env_file: .env
+        links:
+            - database:dbserver
+        depends_on:
+            - database
+            - rabbit
+            - worker
+        volumes:
+            - ./pages_app:/home/pages_app/pages_app:rw
+            - ./autotests.sh:/home/pages_app/pages_app/autotests.sh
+        entrypoint: ./autotests.sh
+    database:
+        image: postgres:latest
+        env_file: .env
+        volumes:
+          - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+        ports:
+            - 0.0.0.0:5432:5432
+
+    # RabbitMQ - queue
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:3-management
+        build:
+            context: .
+            dockerfile: Dockerfile_rabbitmq
+        env_file: .env
+        command: sh ./run_rabbit.sh
+        restart: always
+        ports:
+            - "5672:5672"
+            - "15672:15672"  # here, we can access rabbitmq management plugin
+
+    # Celery worker
+    worker:
+        build:
+            context: .
+            dockerfile: Dockerfile_celery
+        env_file: .env
+        command: sh ./run_celery.sh
+        restart: always
+        volumes:
+            - .:/app
+        links:
+            - rabbit
+        depends_on:
+            - rabbit
+volumes:
+  database-data:

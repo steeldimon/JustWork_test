@@ -1,0 +1,20 @@
+FROM ubuntu:20.04
+
+# add requirements.txt to the image
+ADD requirements.txt /app/requirements.txt
+
+# set working directory to /app/
+WORKDIR /app/
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    gcc python3-psycopg2 binutils libproj-dev gdal-bin python3-dev python3 python3-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV LIBRARY_PATH=/lib:/usr/lib
+RUN pip3 install --upgrade pip \
+  && pip3 install -r requirements.txt \
+  && pip3 install gunicorn
+
+# create unprivileged user
+RUN adduser --disabled-password --gecos '' pages_app

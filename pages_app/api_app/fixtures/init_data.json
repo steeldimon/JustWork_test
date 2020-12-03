@@ -1,0 +1,107 @@
+[
+  {
+    "model": "api_app.page",
+    "pk": 1,
+    "fields": {
+      "title": "Тестовая страница 1"
+    }
+  },
+  {
+    "model": "api_app.page",
+    "pk": 2,
+    "fields": {
+      "title": "Тестовая страница 2"
+    }
+  },
+  {
+    "model": "api_app.video",
+    "pk": 1,
+    "fields": {
+      "title": "Тестовое видео 1 порядок 1",
+      "counter": 0,
+      "sort_field": 1,
+      "page": 1,
+      "url_to_video": "https://youtube.com",
+      "url_to_subtitle": ""
+    }
+  },
+  {
+    "model": "api_app.video",
+    "pk": 2,
+    "fields": {
+      "title": "Тестовое видео 1 порядок 3",
+      "counter": 0,
+      "sort_field": 3,
+      "page": 1,
+      "url_to_video": "https://youtube.com",
+      "url_to_subtitle": ""
+    }
+  },
+  {
+    "model": "api_app.video",
+    "pk": 3,
+    "fields": {
+      "title": "Тестовое видео 2 порядок 2",
+      "counter": 0,
+      "sort_field": 2,
+      "page": 2,
+      "url_to_video": "https://youtube.com",
+      "url_to_subtitle": ""
+    }
+  },
+  {
+    "model": "api_app.audio",
+    "pk": 1,
+    "fields": {
+      "title": "Тестовое аудио 1 порядок 2",
+      "counter": 0,
+      "sort_field": 2,
+      "page": 1,
+      "bitrate": 32.0
+    }
+  },
+  {
+    "model": "api_app.audio",
+    "pk": 2,
+    "fields": {
+      "title": "Тестовое аудио 1 порядок 4",
+      "counter": 0,
+      "sort_field": 4,
+      "page": 1,
+      "bitrate": 33.0
+    }
+  },
+  {
+    "model": "api_app.audio",
+    "pk": 3,
+    "fields": {
+      "title": "Тестовое аудио 2 порядок 1",
+      "counter": 0,
+      "sort_field": 1,
+      "page": 2,
+      "bitrate": 22.0
+    }
+  },
+  {
+    "model": "api_app.text",
+    "pk": 1,
+    "fields": {
+      "title": "Тестовые текст 1 порядок 5",
+      "counter": 0,
+      "sort_field": 5,
+      "page": 1,
+      "text": "тест тест тест"
+    }
+  },
+  {
+    "model": "api_app.text",
+    "pk": 2,
+    "fields": {
+      "title": "Тестовый текст 2 порядок 3",
+      "counter": 0,
+      "sort_field": 3,
+      "page": 2,
+      "text": "Тест"
+    }
+  }
+]

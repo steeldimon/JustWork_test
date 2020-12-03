@@ -1,0 +1,3 @@
+FROM rabbitmq
+
+ADD run_rabbit.sh /run_rabbit.sh
